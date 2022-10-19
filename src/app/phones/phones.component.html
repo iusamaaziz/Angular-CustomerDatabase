@@ -1,0 +1,3 @@
+
+<app-phone *ngFor="let item of phones" (deleting)="removePhone($event)" name="phoneControl" [phn]="item" class="my-2"></app-phone>
+<button type="button" (click)="addPhone()" class="btn btn-outline-info btn-sm w-50 my-2">Add Another Phone</button>

@@ -1,0 +1,51 @@
+<div class="row my-3">
+    <div class="col-3">
+        <label class="label">Address Type</label>
+    </div>
+    <div class="col-9">
+        <input type="radio" class="form-check-input mx-1" [(ngModel)]="address.addressType" [value]="'Home'" /> Home
+        <input type="radio" class="form-check-input mx-1" [(ngModel)]="address.addressType" [value]="'Work'" /> Work
+        <input type="radio" class="form-check-input mx-1" [(ngModel)]="address.addressType" [value]="'Other'" /> Other
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-3">
+        <label class="label">Street Address 1</label>
+    </div>
+    <div class="col-9">
+        <input type="text" [(ngModel)]="address.streetAddress1" placeholder="Street address (first line)" class="form-control"/>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-3">
+        <label class="label">Street Address 2</label>
+    </div>
+    <div class="col-9">
+        <input type="text" [(ngModel)]="address.streetAddress2" placeholder="Street address (second line)" class="form-control"/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        <label>City, State, Zip Code</label>
+    </div>
+    <div class="col-3">
+        <input type="text" placeholder="City" [(ngModel)]="address.city" class="form-control"/>
+    </div>
+    <div class="col-3">
+        <select class="form-select" [(ngModel)]="address.state">
+            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+        </select>
+    </div>
+
+    <div class="col-3">
+        <input type="text" placeholder="Zip Code" [(ngModel)]="address.zipCode" class="form-control"/>
+    </div>
+
+    <!-- Phone -->
+    <app-phones [phones]="address.phoneNumbers"></app-phones>
+
+
+    <button type="button" (click)="onDelete()" class="col-2 btn btn-outline-info btn-sm mx-1">Delete Address</button>
