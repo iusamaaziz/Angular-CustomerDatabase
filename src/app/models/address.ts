@@ -10,6 +10,8 @@ export class Address{
     zipCode: string;
     customerId: number;
 
+    objectState: string;
+
     phoneNumbers: Phone[];
 
     constructor(){
@@ -20,6 +22,7 @@ export class Address{
         this.city = '';
         this.state = '';
         this.zipCode = '';
+        this.objectState = 'Added';
         this.customerId = 0;
         this.phoneNumbers = [
             new Phone()

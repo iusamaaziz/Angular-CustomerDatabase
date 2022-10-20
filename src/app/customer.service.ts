@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Customer } from './models/customer';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { SharedService } from './shared';
 
 @Injectable({
@@ -27,18 +26,9 @@ export class CustomerService {
     console.log('CustomerService.upsertCustomer()');
     console.log(customer);
 
-    console.log(this.shared.phonesToBeDeleted.join(','));
-    this.http.delete(this.base_url + '/addresses/' + this.shared.addressesToBeDeleted.join(',')).subscribe((res) => {
-      console.log(res);
-    },(err:HttpErrorResponse)=>{console.error(err.message);});
-    this.http.delete(this.base_url + '/phonenumbers/' + this.shared.phonesToBeDeleted.join(',')).subscribe((res) => {
-      console.log(res);
-    },(err:HttpErrorResponse)=>{console.error(err.message);});
-    this.shared.addressesToBeDeleted.length = 0;
-    this.shared.phonesToBeDeleted.length = 0;
-
     return this.http.post<Customer>(this.base_url + '/customers', customer).subscribe((res) => {
       console.log(res);
+      alert('Customer saved successfully.');
     },(err:HttpErrorResponse)=>{console.error(err.message);});
   }
 }

@@ -11,7 +11,7 @@ import { Customer } from '../models/customer';
 export class CustomerComponent implements OnInit {
 
   public customer: Customer = new Customer();
-
+  public confirmEmail: string = '';
   constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
@@ -30,5 +30,6 @@ export class CustomerComponent implements OnInit {
 
   saveCustomer() {
     this.customerService.upsertCustomer(this.customer);
+    
   }
 }

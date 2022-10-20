@@ -18,6 +18,7 @@ export class PhoneComponent implements OnInit {
 
   onDelete() {
     console.log('PhoneComponent.onDelete()');
+    this.phn.objectState = 'Deleted';
     this.deleting.emit(this.phn);
   }
 }

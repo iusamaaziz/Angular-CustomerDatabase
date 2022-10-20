@@ -22,6 +22,7 @@ export class AddressComponent implements OnInit {
 
   onDelete() {
     console.log('AddressComponent.onDelete()');
+    this.address.objectState = 'Deleted';
     this.deleting.emit(this.address);
   }
 

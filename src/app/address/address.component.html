@@ -1,11 +1,19 @@
+<hr/>
+<label>{{address.objectState}}</label>
 <div class="row my-3">
     <div class="col-3">
         <label class="label">Address Type</label>
     </div>
     <div class="col-9">
-        <input type="radio" class="form-check-input mx-1" [(ngModel)]="address.addressType" [value]="'Home'" /> Home
-        <input type="radio" class="form-check-input mx-1" [(ngModel)]="address.addressType" [value]="'Work'" /> Work
-        <input type="radio" class="form-check-input mx-1" [(ngModel)]="address.addressType" [value]="'Other'" /> Other
+        <input type="radio" class="form-check-input mx-1" (ngModelChange)="address.objectState='Modified'" required #addressType="ngModel" [(ngModel)]="address.addressType" [value]="'Home'" /> Home
+        <input type="radio" class="form-check-input mx-1" (ngModelChange)="address.objectState='Modified'" required #addressType="ngModel" [(ngModel)]="address.addressType" [value]="'Work'" /> Work
+        <input type="radio" class="form-check-input mx-1" (ngModelChange)="address.objectState='Modified'" required #addressType="ngModel" [(ngModel)]="address.addressType" [value]="'Other'" /> Other
+
+        <div *ngIf="addressType.invalid && (addressType.dirty || addressType.touched)"
+                  class="alert alert-danger m-0 p-0">
+                <div *ngIf="addressType.errors?.required">
+                  Address type is required. 
+                </div>
     </div>
 </div>
 
@@ -14,7 +22,12 @@
         <label class="label">Street Address 1</label>
     </div>
     <div class="col-9">
-        <input type="text" [(ngModel)]="address.streetAddress1" placeholder="Street address (first line)" class="form-control"/>
+        <input type="text" [(ngModel)]="address.streetAddress1" (ngModelChange)="address.objectState='Modified'" required #street1="ngModel" placeholder="Street address (first line)" class="form-control"/>
+        <div *ngIf="street1.invalid && (street1.dirty || street1.touched)"
+                  class="alert alert-danger m-0 p-0">
+                <div *ngIf="street1.errors?.required">
+                  This is required. 
+                </div>
     </div>
 </div>
 
@@ -23,7 +36,7 @@
         <label class="label">Street Address 2</label>
     </div>
     <div class="col-9">
-        <input type="text" [(ngModel)]="address.streetAddress2" placeholder="Street address (second line)" class="form-control"/>
+        <input type="text" [(ngModel)]="address.streetAddress2" (ngModelChange)="address.objectState='Modified'" placeholder="Street address (second line)" class="form-control"/>
     </div>
 </div>
 
@@ -32,20 +45,35 @@
         <label>City, State, Zip Code</label>
     </div>
     <div class="col-3">
-        <input type="text" placeholder="City" [(ngModel)]="address.city" class="form-control"/>
+        <input type="text" placeholder="City" (ngModelChange)="address.objectState='Modified'" [(ngModel)]="address.city" class="form-control"/>
     </div>
     <div class="col-3">
-        <select class="form-select" [(ngModel)]="address.state">
+        <select class="form-select" required #state="ngModel" (ngModelChange)="address.objectState='Modified'" [(ngModel)]="address.state">
             <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
         </select>
+
+        <!-- <div *ngIf="state.invalid && (state.dirty || state.touched)"
+                  class="alert alert-danger dismiss m-0 p-0">
+                <div *ngIf="state.errors?.required">
+                  Last name is required. 
+                </div> -->
     </div>
 
     <div class="col-3">
-        <input type="text" placeholder="Zip Code" [(ngModel)]="address.zipCode" class="form-control"/>
+        <input type="text" placeholder="Zip Code" required #zipcode="ngModel" (ngModelChange)="address.objectState='Modified'" [(ngModel)]="address.zipCode" class="form-control"/>
+
+        <!-- <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)"
+                  class="alert alert-danger m-0 p-0">
+                <div *ngIf="zipcode.errors?.required">
+                  Zip code is required. 
+                </div>
+        </div> -->
     </div>
 
     <!-- Phone -->
-    <app-phones [phones]="address.phoneNumbers"></app-phones>
+    <app-phones [phones]="address.phoneNumbers" [addressId]="address.id"></app-phones>
 
 
-    <button type="button" (click)="onDelete()" class="col-2 btn btn-outline-info btn-sm mx-1">Delete Address</button>
+    <button type="button" (click)="onDelete()" class="col-3 btn btn-outline-info btn-sm m-2">Delete Address</button>
+
+    <hr/>

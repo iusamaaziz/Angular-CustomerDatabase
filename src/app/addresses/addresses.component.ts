@@ -11,26 +11,32 @@ import { SharedService } from '../shared';
 export class AddressesComponent implements OnInit {
 
   @Input() public addresses: Address[] = [];
-
+  @Input() public customerId: number = 0;
   constructor(private cdr: ChangeDetectorRef, private shared: SharedService) { }
 
   ngOnInit(): void {
   }
 
   addAddress() {
-    this.addresses.push(new Address());
+    let address: Address = new Address();
+    address.customerId = this.customerId;
+    this.addresses.push(address);
     this.cdr.detectChanges();
     console.log('AddressesComponent.addAddress()');
   }
 
   deleteAddress(address: Address) {
     console.log('AddressesComponent.deleteAddress()');
-    let index: number = this.addresses.findIndex(a => a === address);
-    this.addresses.splice(index, 1);
-    if(address.id > 0){
-      this.shared.addressesToBeDeleted.push(address.id);
-    }
+    // let index: number = this.addresses.findIndex(a => a === address);
+    // this.addresses.splice(index, 1);
+    // if(address.id > 0){
+    //   this.shared.addressesToBeDeleted.push(address.id);
+    // }
     this.cdr.detectChanges();
+  }
+
+  filteredAddresses(): Address[] {
+    return this.addresses.filter(a => a.objectState !== 'Deleted');
   }
 
 }
