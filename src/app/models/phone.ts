@@ -1,15 +1,15 @@
-export class Phone {
+import { baseModel } from "./baseModel";
+import { objectState } from "./objectState";
+
+export class Phone extends baseModel {
     id: number;
     number: string;
     addressId: number;
 
-    objectState: string;
-
     constructor() {
+        super()
         this.id = 0;
         this.number = '';
         this.addressId = 0;
-
-        this.objectState = 'Added';
     }
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Address } from '../models/address';
+import { objectState } from '../models/objectState';
 
 @Component({
   selector: 'app-address',
@@ -22,8 +23,12 @@ export class AddressComponent implements OnInit {
 
   onDelete() {
     console.log('AddressComponent.onDelete()');
-    this.address.objectState = 'Deleted';
+    this.address.objectState = objectState.Deleted;
     this.deleting.emit(this.address);
+  }
+
+  onModelChanged(){
+    this.address.objectState = objectState.Modified;
   }
 
 }

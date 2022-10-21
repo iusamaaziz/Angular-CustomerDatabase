@@ -1,20 +1,19 @@
 import { Address } from './address';
+import { baseModel } from './baseModel';
 
-export class Customer{
+export class Customer extends baseModel{
     id: number;
     firstName: string;
     lastName: string;
     email: string;
     addresses: Address[];
-    
-    objectState: string;
 
     constructor() {
+        super()
         this.id = 0;
         this.firstName = '';
         this.lastName = '';
         this.email = '';
-        this.objectState = 'Added';
         this.addresses = [
             new Address()
         ];

@@ -1,6 +1,8 @@
+import { baseModel } from './baseModel';
+import { objectState } from './objectState';
 import { Phone } from './phone';
 
-export class Address{
+export class Address extends baseModel {
     id: number;
     addressType: string;
     streetAddress1: string;
@@ -10,11 +12,10 @@ export class Address{
     zipCode: string;
     customerId: number;
 
-    objectState: string;
-
     phoneNumbers: Phone[];
 
     constructor(){
+        super()
         this.id = 0;
         this.addressType = 'Other';
         this.streetAddress1 = '';
@@ -22,7 +23,6 @@ export class Address{
         this.city = '';
         this.state = '';
         this.zipCode = '';
-        this.objectState = 'Added';
         this.customerId = 0;
         this.phoneNumbers = [
             new Phone()

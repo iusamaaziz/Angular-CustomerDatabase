@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Address } from '../models/address';
+import { objectState } from '../models/objectState';
 import { SharedService } from '../shared';
 
 @Component({
@@ -27,16 +28,11 @@ export class AddressesComponent implements OnInit {
 
   deleteAddress(address: Address) {
     console.log('AddressesComponent.deleteAddress()');
-    // let index: number = this.addresses.findIndex(a => a === address);
-    // this.addresses.splice(index, 1);
-    // if(address.id > 0){
-    //   this.shared.addressesToBeDeleted.push(address.id);
-    // }
     this.cdr.detectChanges();
   }
 
   filteredAddresses(): Address[] {
-    return this.addresses.filter(a => a.objectState !== 'Deleted');
+    return this.addresses.filter(a => a.objectState !== objectState.Deleted);
   }
 
 }

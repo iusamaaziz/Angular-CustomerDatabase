@@ -1,7 +1,7 @@
 <div class="row my-2">
     <label class="col-3 col-form-label" for="number">Phone</label>
     <div class="col-3">
-        <input type="text" class="form-control mx-1" id="number" (ngModelChange)="phn.objectState='Modified'" placeholder="Phone" [(ngModel)]="phn.number" />
+        <input type="text" class="form-control mx-1" id="number" (ngModelChange)="onChanged()" placeholder="Phone" [(ngModel)]="phn.number" />
     </div>
 
     <button type="button" (click)="onDelete()" class="col-2 btn btn-outline-info btn-sm mx-1">Delete Phone</button>

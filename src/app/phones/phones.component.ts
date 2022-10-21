@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { objectState } from '../models/objectState';
 import { Phone } from '../models/phone';
 import { SharedService } from '../shared';
 
@@ -12,8 +13,7 @@ export class PhonesComponent implements OnInit {
 
   @Input() phones: Phone[] = [];
   @Input() addressId: number = 0;
-  constructor(private cdr: ChangeDetectorRef, private shared: SharedService) {
-    this.shared = shared;
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -29,16 +29,11 @@ export class PhonesComponent implements OnInit {
 
   removePhone(phone: Phone){
     console.log('PhonesComponent.removePhone()');
-    // let index: number = this.phones.findIndex(p => p === phone);
-    // this.phones.splice(index, 1);
-    // if(phone.id > 0){
-    //   this.shared.phonesToBeDeleted.push(phone.id);
-    // }
     this.cdr.detectChanges();
   }
 
   filteredPhones(): Phone[] {
-    return this.phones.filter(p => p.objectState !== 'Deleted');
+    return this.phones.filter(p => p.objectState !== objectState.Deleted);
   }
 
 }

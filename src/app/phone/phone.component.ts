@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { objectState } from '../models/objectState';
 import { Phone } from '../models/phone';
 
 @Component({
@@ -18,7 +19,11 @@ export class PhoneComponent implements OnInit {
 
   onDelete() {
     console.log('PhoneComponent.onDelete()');
-    this.phn.objectState = 'Deleted';
+    this.phn.objectState = objectState.Deleted;
     this.deleting.emit(this.phn);
+  }
+
+  onChanged(){
+    this.phn.objectState = objectState.Modified;
   }
 }

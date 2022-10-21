@@ -8,8 +8,7 @@
                 <label class="label">First Name</label>
             </div>
             <div class="col-8">
-                <label>{{customer.objectState}}</label>
-                <input type="text" class="form-control" (ngModelChange)="customer.objectState='Modified'" required #firstName="ngModel" [(ngModel)]="customer.firstName"/>
+                <input type="text" class="form-control" (ngModelChange)="onChanged()" required #firstName="ngModel" [(ngModel)]="customer.firstName"/>
                 <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
                   class="alert alert-danger m-0 p-0">
                 <div *ngIf="firstName.errors?.required">
@@ -24,7 +23,7 @@
                 <label class="label">Last Name</label>
             </div>
             <div class="col-8">
-                <input type="text" class="form-control" #lastName="ngModel" required (ngModelChange)="customer.objectState='Modified'" [(ngModel)]="customer.lastName"/>
+                <input type="text" class="form-control" #lastName="ngModel" required (ngModelChange)="onChanged()" [(ngModel)]="customer.lastName"/>
                 <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
                   class="alert alert-danger m-0 p-0">
                 <div *ngIf="lastName.errors?.required">
@@ -38,7 +37,7 @@
                 <label class="label">Email</label>
             </div>
             <div class="col-8">
-                <input type="email" class="form-control" #email="ngModel" (ngModelChange)="customer.objectState='Modified'" required [(ngModel)]="customer.email" pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"/>
+                <input type="email" class="form-control" #email="ngModel" (ngModelChange)="onChanged()" required [(ngModel)]="customer.email" pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"/>
                 <div *ngIf="email.invalid && (email.dirty || email.touched)"
                   class="alert alert-danger m-0 p-0">
                 <div *ngIf="email.errors?.required">
@@ -54,7 +53,7 @@
                 <label class="label">Confirm Email</label>
             </div>
             <div class="col-8">
-                <input type="email" placeholder="Confirm Password" [ngModel]="confirmEmail" #confirmEmail="ngModel" required class="form-control" pattern="{{email.value}}"/>
+                <input type="email" placeholder="Confirm email" [(ngModel)]="confirmEmailAddr" #confirmEmail="ngModel" required class="form-control" pattern="{{email.value}}"/>
                 <div *ngIf="confirmEmail.invalid && (confirmEmail.dirty || confirmEmail.touched || email.dirty || email.touched) && confirmEmail.errors?.pattern"
                   class="alert alert-danger m-0 p-0">
                    Email does not match

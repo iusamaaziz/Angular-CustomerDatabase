@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../models/customer';
+import { objectState } from '../models/objectState';
 
 @Component({
   selector: 'app-customer',
@@ -11,7 +12,7 @@ import { Customer } from '../models/customer';
 export class CustomerComponent implements OnInit {
 
   public customer: Customer = new Customer();
-  public confirmEmail: string = '';
+  public confirmEmailAddr: string = '';
   constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
@@ -26,6 +27,10 @@ export class CustomerComponent implements OnInit {
         alert('User with first name: ' + this.customer.firstName + ' and last name: ' + this.customer.lastName + ' does not exist.');
       }
     );
+  }
+
+  onChanged(){
+    this.customer.objectState = objectState.Modified;
   }
 
   saveCustomer() {
