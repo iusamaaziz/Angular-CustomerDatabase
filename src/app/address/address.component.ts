@@ -24,11 +24,17 @@ export class AddressComponent implements OnInit {
   onDelete() {
     console.log('AddressComponent.onDelete()');
     this.address.objectState = objectState.Deleted;
+    this.address.phoneNumbers.forEach(pn => pn.objectState = objectState.Deleted);
     this.deleting.emit(this.address);
   }
 
   onModelChanged(){
-    this.address.objectState = objectState.Modified;
+    if(this.address.id == 0){
+      this.address.objectState = objectState.Added;
+    }
+    else{
+      this.address.objectState = objectState.Modified;
+    }
   }
 
 }

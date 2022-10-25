@@ -29,6 +29,12 @@ export class PhonesComponent implements OnInit {
 
   removePhone(phone: Phone){
     console.log('PhonesComponent.removePhone()');
+    if(phone.id == 0){
+      let index = this.phones.indexOf(phone);
+      if(index > -1){
+        this.phones.splice(index, 1);
+      }
+    }
     this.cdr.detectChanges();
   }
 

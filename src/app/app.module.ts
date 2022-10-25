@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { PhonesComponent } from './phones/phones.component';
 import { AddressesComponent } from './addresses/addresses.component';
-import { SharedService } from './shared'
+import { SharedService } from './shared';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { SharedService } from './shared'
     MainComponent,
     NavComponent,
     PhonesComponent,
-    AddressesComponent,
+    AddressesComponent
   ],
   imports: [
     BrowserModule,

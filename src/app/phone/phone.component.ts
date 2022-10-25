@@ -24,6 +24,11 @@ export class PhoneComponent implements OnInit {
   }
 
   onChanged(){
-    this.phn.objectState = objectState.Modified;
+    if(this.phn.id == 0){
+      this.phn.objectState = objectState.Added;
+    }
+    else{
+      this.phn.objectState = objectState.Modified;
+    }
   }
 }

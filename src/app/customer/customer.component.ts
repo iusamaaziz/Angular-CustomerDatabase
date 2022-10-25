@@ -30,11 +30,39 @@ export class CustomerComponent implements OnInit {
   }
 
   onChanged(){
-    this.customer.objectState = objectState.Modified;
+    if(this.customer.id == 0){
+      this.customer.objectState = objectState.Added;
+    }
+    else{
+      this.customer.objectState = objectState.Modified;
+    }
   }
 
   saveCustomer() {
-    this.customerService.upsertCustomer(this.customer);
+    this.customerService.upsertCustomer(this.customer).subscribe(
+      (data: Customer) => {
+
+        this.customer = { ...data };
+        this.recursiveReset(this.customer);
+        alert('Customer saved successfully.');
+        console.log(this.customer);
+      }, (err: HttpErrorResponse) => {
+        alert(err.error);
+      }
+    )
+  }
+
+  recursiveReset(value: any, prop: string = 'objectState') {
     
+    value[prop] = objectState.Unchanged;
+
+    for(let key in value){
+      let obj = value[key];
+      if(Array.isArray(obj)){
+        for(let item of obj){
+          this.recursiveReset(item, prop);
+        }
+      }
+    }
   }
 }

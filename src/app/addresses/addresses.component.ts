@@ -28,6 +28,12 @@ export class AddressesComponent implements OnInit {
 
   deleteAddress(address: Address) {
     console.log('AddressesComponent.deleteAddress()');
+    if(address.id == 0){
+      let index = this.addresses.indexOf(address);
+      if(index > -1){
+        this.addresses.splice(index, 1);
+      }
+    }
     this.cdr.detectChanges();
   }
 

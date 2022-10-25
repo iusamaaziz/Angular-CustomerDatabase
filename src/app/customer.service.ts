@@ -22,13 +22,11 @@ export class CustomerService {
     return customer;
   }
 
-  upsertCustomer(customer: Customer) {
+  upsertCustomer(customer: Customer): Observable<Customer> {
     console.log('CustomerService.upsertCustomer()');
     console.log(customer);
+    let result = this.http.post<Customer>(this.base_url + '/customers', customer);
 
-    return this.http.post<Customer>(this.base_url + '/customers', customer).subscribe((res) => {
-      console.log(res);
-      alert('Customer saved successfully.');
-    },(err:HttpErrorResponse)=>{console.error(err.message);});
+    return result;
   }
 }
